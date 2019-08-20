@@ -1,4 +1,4 @@
-package com.lab.manus.LabManusPoc;
+package com.lab.manus;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

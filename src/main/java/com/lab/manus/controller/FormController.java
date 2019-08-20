@@ -1,22 +1,32 @@
 package com.lab.manus.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.ui.Model;
 
 import com.lab.manus.entity.FormEntitiy;
 import com.lab.manus.repository.FormRepo;
-@CrossOrigin
-@RestController
+
+@Controller
 public class FormController {
 	
 	@Autowired
 	FormRepo formRepo;
 
-	@PostMapping("/create")
-	public FormEntitiy createForm(@  RequestBody FormEntitiy formEntitiy) {
-		return formRepo.save(formEntitiy);
+	@RequestMapping(value="/dynamicform", method=RequestMethod.POST)
+	public String createForm(@ModelAttribute FormEntitiy formEntitiy,Model model) {
+		model.addAttribute("formentitiy", new FormEntitiy());
+		formRepo.save(formEntitiy);
+		return "Success";
+	}
+	
+	@RequestMapping("/form")
+	public ModelAndView firstPage(Model model) {
+		model.addAttribute("formentitiy", new FormEntitiy());
+		return new ModelAndView("DynamicForm");
 	}
 }
