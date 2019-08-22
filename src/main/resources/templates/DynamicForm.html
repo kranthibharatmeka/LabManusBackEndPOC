@@ -4,10 +4,20 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-  <h1>My Form</h1>
-    <form action="#" th:action="@{/dynamicform}" th:object="${formentitiy}" method="post">
+  <h1>Dynamic Form</h1>
+    <form action="#" th:action="@{/dynamicform}" th:object="${formentity}" method="post">
+        <p>Form Name: <input type="text" th:field="*{subFormNames.formName}" /></p>
         <p>Field Name: <input type="text" th:field="*{fieldName}" /></p>
-        <p>Field Type: <input type="text" th:field="*{fieldType}" /></p>
+        <p>Field Type: <select th:field="*{fieldType}">
+    						<option th:value="'t'" th:text="text"></option>
+    						<option th:value="'c'" th:text="checkbox"></option>
+    						<option th:value="'r'" th:text="radio"></option>
+    						<option th:value="'sl'" th:text="select"></option>
+    						<option th:value="'d'" th:text="date"></option>
+    						<option th:value="'e'" th:text="email"></option>
+    						<option th:value="'p'" th:text="password"></option>
+    						<option th:value="'sb'" th:text="submit"></option>
+						</select>
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
     </form>
 </body>
