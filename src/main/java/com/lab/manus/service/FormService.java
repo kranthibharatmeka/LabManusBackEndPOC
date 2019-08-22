@@ -1,5 +1,8 @@
 package com.lab.manus.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,5 +28,13 @@ public class FormService {
 	
 	public SubFormNames createFormName(SubFormNames subFormNames) {
 		return SubFormNamesRepo.save(subFormNames);
+	}
+	
+	public List<SubFormNames> getAllFormNames() {
+		return SubFormNamesRepo.findAll();
+	}
+	
+	public List<FormEntity> getFormFieldsByFormId(Long formId) {
+		return formRepo.getFormFieldsByFormId(formId);
 	}
 }

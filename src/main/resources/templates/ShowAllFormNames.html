@@ -1,0 +1,10 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Forms</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+      <div th:each="formNames : ${allFormNames}">
+        <a th:href="@{'/getForm/'+${formNames.formId}}">[[${formNames.formName}]]</a>
+      </div>
+</body>

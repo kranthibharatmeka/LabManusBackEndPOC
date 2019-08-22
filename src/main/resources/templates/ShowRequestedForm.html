@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Requested Form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+         <form action="#" th:action="@{/saveDynamicForm}" th:object="${requestedFormFields}" method="post">
+	         <div th:each="formFields,itr : ${requestedFormFields}">
+	        	  <div th:if="${formFields.fieldType=='t'}">
+	        		<p>[[${formFields.fieldName}]] : <input type="text" name="fieldName" /></p>
+	        	  </div>
+	        	  <div th:if="${formFields.fieldType=='r'}">
+	        		<p>[[${formFields.fieldName}]] : Male <input type="radio" name="fieldName" /> Female <input type="radio" name="fieldName" /></p>
+	        	  </div>
+	        	  <div th:if="${formFields.fieldType=='d'}">
+	        		<p>[[${formFields.fieldName}]] : <input type="date" name="fieldName" /></p>
+	        	  </div>
+	         </div>
+	        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+      </form>
+</body>

@@ -1,7 +1,5 @@
 package com.lab.manus.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,7 +26,7 @@ public class FormController {
 		SubFormNames createdNewSubFormName = formService.createFormName(subFormNames);
 
 		formEntitiy.setSubFormNames(createdNewSubFormName);		
-		model.addAttribute("formentitiy", formEntitiy);		
+		model.addAttribute("formentity", formEntitiy);		
 		formService.createForm(formEntitiy);
 		
 		return "Success";
