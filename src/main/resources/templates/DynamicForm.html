@@ -2,25 +2,89 @@
 <head>
     <title>Form Submission</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        let addRow = function () {
+        let listName = 'formEntityList'; //list name in FormEntityList.class
+        let fieldsNames = ['fieldName', 'fieldType']; //field names from FormEntity
+        let rowIndex = $('div.index').length;
+        let row = document.createElement('div');
+        row.classList.add('row', 'index');
+        row.classList.add('row', 'ml-1');
+
+        fieldsNames.forEach((fieldName) => {
+            let col = document.createElement('div');
+            col.classList.add('col', 'form-group');
+            col.classList.add('col', 'col-md-2');
+            
+            let input = document.createElement('input');
+            if(fieldName =='fieldType'){
+            	var arrayText = ['text', 'checkbox', 'radio','select', 'date', 'email'];
+            	var arrayValue = ['t', 'c', 'r','sl', 'd', 'e'];
+            	input = document.createElement("select");
+            	for (var i = 0; i < arrayText.length; i++) {
+            	    var option = document.createElement("option");
+            	    option.value = arrayValue[i];
+            	    option.text = arrayText[i];
+            	    input.appendChild(option);
+            	  }
+            } else{
+            	input.type = 'text';
+            }
+            input.classList.add('form-control');
+            input.id = listName + rowIndex + '.' + fieldName;
+            input.setAttribute('name', listName + '[' + rowIndex + '].' + fieldName);
+
+            col.appendChild(input);
+            row.appendChild(col);
+        });
+
+        document.getElementById('formEntities').appendChild(row);
+		};
+    </script>
 </head>
 <body>
-  <h1>Dynamic Form</h1>
-    <form action="#" th:action="@{/dynamicform}" th:object="${formentity}" method="post">
-        <p>Form Name: <input type="text" th:field="*{subFormNames.formName}" /></p>
-        <p>Field Name: <input type="text" th:field="*{fieldName}" /></p>
-        <p>Field Type: <select th:field="*{fieldType}">
-    						<option th:value="'t'" th:text="text"></option>
-    						<option th:value="'c'" th:text="checkbox"></option>
-    						<option th:value="'r'" th:text="radio"></option>
-    						<option th:value="'sl'" th:text="select"></option>
-    						<option th:value="'d'" th:text="date"></option>
-    						<option th:value="'e'" th:text="email"></option>
-    						<option th:value="'p'" th:text="password"></option>
-    						<option th:value="'sb'" th:text="submit"></option>
-						</select>
-        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+<div class="card m-1">
+  <h2 class="text-center">Dynamic Form</h2>
+  <br>
+    <form action="#" th:action="@{/dynamicform}" th:object="${formEntities}" method="post">
+                   <div class="form-group col-md-2">Form Name</div>
+                        <div class="form-group col-md-2">
+                            <input type="text" th:field="*{formEntityList[0].subFormNames.formName}" class="form-control">
+                   </div>
+                  <div  id="formEntities">
+                    <div class="row ml-1">
+                        <div class="form-group col-md-2">Field Name</div>
+                        <div class="form-group col-md-2">Field Type</div>
+                        <div class="form-group col-md-2">Add Row</div>
+                    </div>    
+                    <div class="row ml-1 index" th:each="formEntity, status : ${formEntities.formEntityList}">
+                        <div class="form-group col-md-2">
+                            <input type="text" th:field="*{formEntityList[__${status.index}__].fieldName}" class="form-control">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <select th:field="*{formEntityList[__${status.index}__].fieldType}" class="form-control" id="fieldType">
+	    						<option th:value="'t'" th:text="text"></option>
+	    						<option th:value="'c'" th:text="checkbox"></option>
+	    						<option th:value="'r'" th:text="radio"></option>
+	    						<option th:value="'sl'" th:text="select"></option>
+	    						<option th:value="'d'" th:text="date"></option>
+	    						<option th:value="'e'" th:text="email"></option>
+						    </select>
+                        </div>
+                        <div class="form-group col-md-2">
+		                	<button type="button" class="btn btn-success" onclick="addRow()">Add row</button>
+		                </div>
+                    </div>
+                   </div>
+                  <div class="form-group col-md-4">
+                    <input type="submit" value="Submit" class="btn btn-primary"/> <input type="reset" value="Reset" class="btn btn-primary"/>
+                  </div>
     </form>
-    
+ </div>   
     <div>
     	<a href="/getAllFormNames">Show All Forms</a>
     </div>

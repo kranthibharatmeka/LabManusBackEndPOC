@@ -1,5 +1,6 @@
 package com.lab.manus.entity;
 
+
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -16,7 +17,7 @@ import javax.persistence.Table;
 @Table(name = "form_entity")
 public class FormEntity {
     @Id 
-    @GeneratedValue(strategy=GenerationType.SEQUENCE)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
     

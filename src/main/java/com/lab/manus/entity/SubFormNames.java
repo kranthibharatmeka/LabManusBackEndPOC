@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class SubFormNames {
 	
     @Id 
-    @GeneratedValue(strategy=GenerationType.SEQUENCE)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "form_id", unique = true, nullable = false) 
 	private Long formId;
     
