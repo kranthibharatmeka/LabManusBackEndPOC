@@ -51,10 +51,10 @@
   <h2 class="text-center">Dynamic Form</h2>
   <br>
     <form action="#" th:action="@{/dynamicform}" th:object="${formEntities}" method="post">
-                   <div class="form-group col-md-2">Form Name</div>
                         <div class="form-group col-md-2">
+                            <label>Form Name</label> 
                             <input type="text" th:field="*{formEntityList[0].subFormNames.formName}" class="form-control">
-                   </div>
+                       </div>
                   <div  id="formEntities">
                     <div class="row ml-1">
                         <div class="form-group col-md-2">Field Name</div>
@@ -80,13 +80,13 @@
 		                </div>
                     </div>
                    </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-4 ml-1">
                     <input type="submit" value="Submit" class="btn btn-primary"/> <input type="reset" value="Reset" class="btn btn-primary"/>
                   </div>
     </form>
- </div>   
-    <div>
-    	<a href="/getAllFormNames">Show All Forms</a>
+    <div class="ml-3">
+    	<a class="btn btn-outline-info ml-1 mb-1" href="/getAllFormNames">Show All Forms</a>
     </div>
+ </div>   
 </body>
 </html>

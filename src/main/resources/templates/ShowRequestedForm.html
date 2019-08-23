@@ -4,25 +4,28 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body>
-         <form action="#" th:action="@{/saveDynamicForm}" th:object="${requestedFormFields}" method="post">
-	         <div th:each="formFields,itr : ${requestedFormFields}">
-	        	  <div th:if="${formFields.fieldType=='t'}">
-	        		<p>[[${formFields.fieldName}]] : <input type="text" name="fieldName" /></p>
-	        	  </div>
-	        	  <div th:if="${formFields.fieldType=='r'}">
-	        		<p>[[${formFields.fieldName}]] : Male <input type="radio" name="fieldName" /> Female <input type="radio" name="fieldName" /></p>
-	        	  </div>
-	        	  <div th:if="${formFields.fieldType=='d'}">
-	        		<p>[[${formFields.fieldName}]] : <input type="date" name="fieldName" /></p>
-	        	  </div>
-	        	  <div th:if="${formFields.fieldType=='c'}">
-	        		<p>[[${formFields.fieldName}]] : <input type="checkbox" name="fieldName" /></p>
-	        	  </div>
-	        	  <div th:if="${formFields.fieldType=='e'}">
-	        		<p>[[${formFields.fieldName}]] : <input type="email" name="fieldName" /></p>
-	        	  </div>
-	         </div>
-	        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-      </form>
+<body> 
+ 		<div class="card m-1">
+	         <form action="#" th:action="@{/saveDynamicForm}" th:object="${requestedFormFields}" method="post">
+	             <h2 class="text-muted text-center">[[${requestedFormFields[0].subFormNames.formName}]]</h2>
+		         <div th:each="formFields,itr : ${requestedFormFields}" class="ml-2">
+		        	  <div th:if="${formFields.fieldType=='t'}">
+		        		<p>[[${formFields.fieldName}]] : <input type="text" name="fieldName" /></p>
+		        	  </div>
+		        	  <div th:if="${formFields.fieldType=='r'}">
+		        		<p>[[${formFields.fieldName}]] : Male <input type="radio" name="fieldName" /> Female <input type="radio" name="fieldName" /></p>
+		        	  </div>
+		        	  <div th:if="${formFields.fieldType=='d'}">
+		        		<p>[[${formFields.fieldName}]] : <input type="date" name="fieldName" /></p>
+		        	  </div>
+		        	  <div th:if="${formFields.fieldType=='c'}">
+		        		<p>[[${formFields.fieldName}]] : <input type="checkbox" name="fieldName" /></p>
+		        	  </div>
+		        	  <div th:if="${formFields.fieldType=='e'}">
+		        		<p>[[${formFields.fieldName}]] : <input type="email" name="fieldName" /></p>
+		        	  </div>
+		         </div>
+		        <p class="ml-2"><input type="submit" value="Submit" class="btn btn-primary"/> <input type="reset" value="Reset" class="btn btn-primary"/></p>
+	      </form>
+        </div>
 </body>

@@ -2,9 +2,13 @@
 <head>
     <title>All Forms</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body>
+<body> 
+	  <div class="card m-1">
+	  <h2 class="text-muted">Forms</h2>
       <div th:each="formNames : ${allFormNames}">
-        <a th:href="@{'/getForm/'+${formNames.formId}}">[[${formNames.formName}]]</a>
+        <a class="btn btn-outline-info mb-1" th:href="@{'/getForm/'+${formNames.formId}}">[[${formNames.formName}]]</a>
+      </div>
       </div>
 </body>
