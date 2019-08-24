@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.lab.manus.entity.FormEntity;
 import com.lab.manus.entity.SubFormNames;
 import com.lab.manus.service.FormService;
+import com.lab.manus.util.FormEntity;
 
 import net.bytebuddy.implementation.bind.annotation.BindingPriority;
 

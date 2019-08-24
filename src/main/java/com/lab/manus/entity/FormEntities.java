@@ -2,6 +2,8 @@ package com.lab.manus.entity;
 
 import java.util.List;
 
+import com.lab.manus.util.FormEntity;
+
 public class FormEntities {
     List<FormEntity> formEntityList;
 

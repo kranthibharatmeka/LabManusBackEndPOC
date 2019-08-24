@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.lab.manus.entity.FormEntity;
 import com.lab.manus.entity.SubFormNames;
 import com.lab.manus.repository.FormRepo;
 import com.lab.manus.repository.SubFormNamesRepo;
+import com.lab.manus.util.FormEntity;
 
 @Service
 @Transactional

@@ -1,4 +1,4 @@
-package com.lab.manus.entity;
+package com.lab.manus.util;
 
 
 import java.util.Objects;
@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.lab.manus.entity.SubFormNames;
 
 @Entity
 @Table(name = "form_entity")
@@ -41,7 +43,8 @@ public class FormEntity {
 		return fieldName;
 	}
 	public void setFieldName(String fieldName) {
-		this.fieldName = fieldName;
+		
+		this.fieldName = fieldName.replaceAll(" ", "_");
 	}
 	public String getFieldType() {
 		return fieldType;
