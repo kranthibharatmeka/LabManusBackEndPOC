@@ -1,8 +1,6 @@
 package com.lab.manus.util;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -18,7 +16,6 @@ public class FormHandler {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
-//	@Autowired
 	FieldMapper fieldMapper = new FieldMapper();
 	 
 	public boolean  createDynamicTable(String formName, List<FormEntity> formEntityList) {
@@ -42,7 +39,6 @@ public class FormHandler {
 		System.out.println("-----QUERY----\n");
 		System.out.println(sql);
 		System.out.println("\n-----QUERY----");
-//		jdbcTemplate.execute(sql);
 
 
 		   ApplicationContext ctx = new AnnotationConfigApplicationContext(ApplicationConfig.class);

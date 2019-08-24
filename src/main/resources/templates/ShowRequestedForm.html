@@ -5,18 +5,17 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body> 
- 		<div class="card m-1">
+ 		<div class="card m-3 border-primary">
 	         <form action="#" th:action="@{/saveDynamicForm}" th:object="${requestedFormFields}" method="post">
 	         
 	         <input type="hidden" name="form_name" th:value="${requestedFormFields[0].subFormNames.formName}">
-	         
-	             <h2 class="text-muted text-center">[[${requestedFormFields[0].subFormNames.formName}]]</h2>
-		         <div th:each="formFields,itr : ${requestedFormFields}" class="ml-2">
+	             <h2 class="text-center bg-primary"><a class="btn btn-primary float-left" href="/form">Home</a>[[${#strings.replace(requestedFormFields[0].subFormNames.formName, '_',' ')}]]</h2>
+		         <div th:each="formFields,itr : ${requestedFormFields}" class="text-primary ml-2">
 		        	  <div th:if="${formFields.fieldType=='t'}">
 		        		<p>[[${formFields.fieldName}]] : <input type="text" th:name="${formFields.fieldName}" /></p>
 		        	  </div>
 		        	  <div th:if="${formFields.fieldType=='r'}">
-		        		<p>[[${formFields.fieldName}]] : Male <input type="radio"  th:name="${formFields.fieldName}" /> Female <input type="radio" name="fieldName" /></p>
+		        		<p>[[${formFields.fieldName}]] : Male <input type="radio"  th:name="${formFields.fieldName}" /> Female <input type="radio" th:name="${formFields.fieldName}" /></p>
 		        	  </div>
 		        	  <div th:if="${formFields.fieldType=='d'}">
 		        		<p>[[${formFields.fieldName}]] : <input type="date"  th:name="${formFields.fieldName}" /></p>

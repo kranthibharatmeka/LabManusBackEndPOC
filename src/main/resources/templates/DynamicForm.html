@@ -22,7 +22,7 @@
             
             let input = document.createElement('input');
             if(fieldName =='fieldType'){
-            	var arrayText = ['text', 'checkbox', 'radio','select', 'date', 'email'];
+            	var arrayText = ['text','radio','date', 'email'];
             	var arrayValue = ['t', 'c', 'r','sl', 'd', 'e'];
             	input = document.createElement("select");
             	for (var i = 0; i < arrayText.length; i++) {
@@ -47,10 +47,11 @@
     </script>
 </head>
 <body>
-<div class="card m-1">
-  <h2 class="text-center">Dynamic Form</h2>
+<div class="card m-3 border-primary">
+  <h2 class="text-center bg-primary"><a class="btn btn-primary float-left" href="/getAllFormNames">Show All Forms</a>Dynamic Form</h2>
   <br>
     <form action="#" th:action="@{/dynamicform}" th:object="${formEntities}" method="post">
+     <div class="text-primary">
                         <div class="form-group col-md-2">
                             <label>Form Name</label> 
                             <input type="text" th:field="*{formEntityList[0].subFormNames.formName}" class="form-control">
@@ -68,11 +69,14 @@
                         <div class="form-group col-md-2">
                             <select th:field="*{formEntityList[__${status.index}__].fieldType}" class="form-control" id="fieldType">
 	    						<option th:value="'t'" th:text="text"></option>
-	    						<option th:value="'c'" th:text="checkbox"></option>
 	    						<option th:value="'r'" th:text="radio"></option>
-	    						<option th:value="'sl'" th:text="select"></option>
 	    						<option th:value="'d'" th:text="date"></option>
 	    						<option th:value="'e'" th:text="email"></option>
+	    						<!-- @TODO - check box (we need to facilitate multiple values) and select(need to facilitate options for select)
+	    						   fields need to be treated as special case
+	    						<option th:value="'c'" th:text="checkbox"></option>
+	    						<option th:value="'sl'" th:text="select"></option>
+	    						 -->
 						    </select>
                         </div>
                         <div class="form-group col-md-2">
@@ -83,10 +87,8 @@
                   <div class="form-group col-md-4 ml-1">
                     <input type="submit" value="Submit" class="btn btn-primary"/> <input type="reset" value="Reset" class="btn btn-primary"/>
                   </div>
+          </div>
     </form>
-    <div class="ml-3">
-    	<a class="btn btn-outline-info ml-1 mb-1" href="/getAllFormNames">Show All Forms</a>
-    </div>
  </div>   
 </body>
 </html>

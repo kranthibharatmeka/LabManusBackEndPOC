@@ -7,15 +7,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
 
 import com.lab.manus.entity.FormEntities;
@@ -30,7 +25,7 @@ public class FormController {
 	@Autowired
 	FormService formService;
 	
-	@RequestMapping(value="/dynamicform", method=RequestMethod.POST)
+	@PostMapping("/dynamicform")
 	public String createForm(@ModelAttribute FormEntities formEntities, Model model) {
 		FormEntities savedFormEntities = new FormEntities();
 		List<FormEntity> formEntityList = new ArrayList<FormEntity>();
@@ -49,15 +44,11 @@ public class FormController {
 		model.addAttribute("savedFormEntities", savedFormEntities);	
 		
 		
-		System.out.println("----------------------------------------");
 		for(FormEntity formEntity : formEntityList) {
-			
 			System.out.println(formEntity.getFieldName().replaceAll(" ", "_") +"  |  "+ formEntity.getFieldType());
 		}
-		System.out.println("----------------------------------------");
 		
 		FormHandler formHandler = new FormHandler();
-		
 		formHandler.createDynamicTable(formTitle, formEntityList);
 		
 		return "Success";
@@ -73,38 +64,7 @@ public class FormController {
     
     @PostMapping("/saveDynamicForm")
     public String saveFormEntity(HttpServletRequest request, Model model) {
-    	
-    	System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-    	String tabName = request.getParameter("form_name");
-    	String query = "INSERT INTO "+ tabName + " "; 
-    	String colNames = "( ";
-    	String colVals = "( ";
-    	
-    	for(String paramName : request.getParameterMap().keySet()) {
-    		
-    		if( !paramName.equalsIgnoreCase("form_name") ) {
-    			colNames+= paramName + ",";    			
-    			String temp = request.getParameter(paramName);    					
-    			if(temp.equalsIgnoreCase("on")) {
-    				temp = "1";
-    			}else {
-    				temp = "'" + temp + "'";
-    			}    					
-        		colVals+= temp + ",";	
-    		}
-    	}
-    	
-    	colNames = colNames.substring(0, colNames.length() - 1) + " )";
-    	colVals = colVals.substring(0, colVals.length() - 1) + " )";
-    	
-    	query+= colNames + "VALUES " + colVals;
-    	
-    	System.out.println(">>>insert Quey>>>>>  "+query);
-
-    	FormHandler formHandler = new FormHandler();
-		
-		formHandler.insertToDynamicTable(query);
-		
+    	formService.saveFormEntity(request);
     	return "Success";
     }
 }

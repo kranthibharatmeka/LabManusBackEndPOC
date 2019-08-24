@@ -5,10 +5,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body> 
-	  <div class="card m-1">
-	  <h2 class="text-muted">Forms</h2>
-      <div th:each="formNames : ${allFormNames}">
-        <a class="btn btn-outline-info mb-1" th:href="@{'/getForm/'+${formNames.formId}}">[[${formNames.formName}]]</a>
-      </div>
+	  <div class="card m-3 border-primary">
+		  <h2 class="text-muted text-center bg-primary">Forms <a class="btn btn-primary mb-1 float-right" href="/form">Home</a></h2>
+	      <div class="ml-2" th:each="formNames : ${allFormNames}">
+	        <a class="btn btn-outline-info mb-1" th:href="@{'/getForm/'+${formNames.formId}}">[[${#strings.replace(formNames.formName, '_',' ')}]]</a>
+	      </div>
       </div>
 </body>
