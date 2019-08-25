@@ -11,20 +11,35 @@
 	         <input type="hidden" name="form_name" th:value="${requestedFormFields[0].subFormNames.formName}">
 	             <h2 class="text-center bg-primary"><a class="btn btn-primary float-left" href="/form">Home</a>[[${#strings.replace(requestedFormFields[0].subFormNames.formName, '_',' ')}]]</h2>
 		         <div th:each="formFields,itr : ${requestedFormFields}" class="text-primary ml-2">
-		        	  <div th:if="${formFields.fieldType=='t'}">
-		        		<p>[[${formFields.fieldName}]] : <input type="text" th:name="${formFields.fieldName}" /></p>
+		        	  <div class="form-group row" th:if="${formFields.fieldType=='t'}">
+		        		<label class="col-sm-2 col-form-label">[[${#strings.replace(formFields.fieldName, '_',' ')}]]</label>
+		        		<div class="col-sm-2">
+		        		   <input type="text" th:name="${formFields.fieldName}" class="form-control"/>
+		        		</div>
 		        	  </div>
-		        	  <div th:if="${formFields.fieldType=='r'}">
-		        		<p>[[${formFields.fieldName}]] : Male <input type="radio"  th:name="${formFields.fieldName}" /> Female <input type="radio" th:name="${formFields.fieldName}" /></p>
+		        	  <div class="form-group row" th:if="${formFields.fieldType=='r'}">
+		        	    <label class="col-sm-2 col-form-label">[[${#strings.replace(formFields.fieldName, '_',' ')}]]</label>
+		        		<div class="col-sm-2">
+		        		   <p>Male <input type="radio"  th:name="${formFields.fieldName}" /> Female <input type="radio" th:name="${formFields.fieldName}" /></p>
+		        		</div>
 		        	  </div>
-		        	  <div th:if="${formFields.fieldType=='d'}">
-		        		<p>[[${formFields.fieldName}]] : <input type="date"  th:name="${formFields.fieldName}" /></p>
+		        	  <div class="form-group row" th:if="${formFields.fieldType=='d'}">
+		        	    <label class="col-sm-2 col-form-label">[[${#strings.replace(formFields.fieldName, '_',' ')}]]</label>
+		        	    <div class="col-sm-2">
+		        	      <input type="date"  th:name="${formFields.fieldName}" class="form-control"/>
+		        	    </div>
 		        	  </div>
-		        	  <div th:if="${formFields.fieldType=='c'}">
-		        		<p>[[${formFields.fieldName}]] : <input type="checkbox"  th:name="${formFields.fieldName}" /></p>
+		        	  <div class="form-group row" th:if="${formFields.fieldType=='c'}">
+		        	    <label class="col-sm-2 col-form-label">[[${#strings.replace(formFields.fieldName, '_',' ')}]]</label>
+		        	    <div class="col-sm-2">
+		        	      <input type="checkbox"  th:name="${formFields.fieldName}" class="form-control"/>
+		        	    </div>
 		        	  </div>
-		        	  <div th:if="${formFields.fieldType=='e'}">
-		        		<p>[[${formFields.fieldName}]] : <input type="email"  th:name="${formFields.fieldName}" /></p>
+		        	  <div class="form-group row" th:if="${formFields.fieldType=='e'}">
+		        	    <label class="col-sm-2 col-form-label">[[${#strings.replace(formFields.fieldName, '_',' ')}]]</label>
+		        	    <div class="col-sm-2">
+		        	      <input type="email"  th:name="${formFields.fieldName}"  class="form-control"/>
+		        	    </div>
 		        	  </div>
 		         </div>
 		        <p class="ml-2"><input type="submit" value="Submit" class="btn btn-primary"/> <input type="reset" value="Reset" class="btn btn-primary"/></p>
