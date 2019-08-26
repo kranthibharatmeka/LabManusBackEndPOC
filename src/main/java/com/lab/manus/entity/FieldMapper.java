@@ -14,7 +14,8 @@ public class FieldMapper {
 		fieldsMap.put("t", "VARCHAR(50)");
 		fieldsMap.put("d", "date");
 		fieldsMap.put("e", "VARCHAR(50)");
-		fieldsMap.put("decimalNumberType", "numeric");
+		fieldsMap.put("ta", "VARCHAR(100)");
+		fieldsMap.put("n", "numeric");
 	}
 	 
 	

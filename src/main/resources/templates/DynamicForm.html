@@ -22,8 +22,8 @@
             
             let input = document.createElement('input');
             if(fieldName =='fieldType'){
-            	var arrayText = ['text','radio','date', 'email'];
-            	var arrayValue = ['t', 'c', 'r','sl', 'd', 'e'];
+            	var arrayText = ['text','radio','date', 'email','textarea','number'];
+            	var arrayValue = ['t', 'r', 'd', 'e', 'ta','n'];
             	input = document.createElement("select");
             	for (var i = 0; i < arrayText.length; i++) {
             	    var option = document.createElement("option");
@@ -72,6 +72,8 @@
 	    						<option th:value="'r'" th:text="radio"></option>
 	    						<option th:value="'d'" th:text="date"></option>
 	    						<option th:value="'e'" th:text="email"></option>
+	    						<option th:value="'ta'" th:text="textarea"></option>
+	    						<option th:value="'n'" th:text="number"></option>
 	    						<!-- @TODO - check box (we need to facilitate multiple values) and select(need to facilitate options for select)
 	    						   fields need to be treated as special case
 	    						<option th:value="'c'" th:text="checkbox"></option>
