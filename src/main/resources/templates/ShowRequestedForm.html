@@ -9,7 +9,7 @@
 	         <form action="#" th:action="@{/saveDynamicForm}" th:object="${requestedFormFields}" method="post">
 	         
 	         <input type="hidden" name="form_name" th:value="${requestedFormFields[0].subFormNames.formName}">
-	             <h2 class="text-center bg-primary"><a class="btn btn-primary float-left" href="/form">Home</a> <a class="btn btn-primary mr-2 float-left" href="/getAllFormNames">Show All Forms</a>[[${#strings.replace(requestedFormFields[0].subFormNames.formName, '_',' ')}]]</h2>
+	             <h2 class="text-center bg-primary"><a class="btn btn-primary float-left" href="/form">Home</a> <a class="btn btn-primary mr-2 float-left" href="/getAllFormNames">User Forms</a>[[${#strings.replace(requestedFormFields[0].subFormNames.formName, '_',' ')}]]</h2>
 		         <div th:each="formFields,itr : ${requestedFormFields}" class="text-primary ml-2">
 		              <div th:if="${formFields.archive == '1'}" >
 		              <!-- Fields are Hidden If Archive == 1 -->

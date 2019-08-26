@@ -58,7 +58,7 @@
 </head>
 <body>
 <div class="card m-3 border-primary">
-  <h2 class="text-center bg-primary"><a class="btn btn-primary float-left" href="/getAllFormNames">Show All Forms</a>Dynamic Form</h2>
+  <h2 class="text-center bg-primary"><a class="btn btn-primary mb-1 float-left" href="/form">Home</a><a class="btn btn-primary float-left" href="/getAllFormNames">User Forms</a><a class="btn btn-primary mr-2 float-left" href="/getAllFormForEdit">User Forms Customisation</a>Dynamic Form</h2>
   <br>
     <form action="#" th:action="@{/dynamicform}" th:object="${formEntities}" method="post">
      <div class="text-primary">
@@ -96,7 +96,7 @@
 						    </select>
                         </div>
 		                <div class="form-group col-md-1">
-                            <input type="checkbox" th:field="*{formEntityList[__${status.index}__].archive}" class="form-control" th:value="0"  onclick="addArchive(this)">
+                            <input type="checkbox" th:field="*{formEntityList[__${status.index}__].archive}" class="form-control" th:value="*{formEntityList[__${status.index}__].archive}" onclick="addArchive(this)" >
                         </div>
                         <div class="form-group col-md-1">
 		                	<button type="button" class="btn btn-success form-control" onclick="addRow()">Add row</button>
