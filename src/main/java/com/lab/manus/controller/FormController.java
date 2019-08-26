@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.ui.Model;
 
 import com.lab.manus.entity.FormEntities;
+import com.lab.manus.entity.FormEntity;
 import com.lab.manus.entity.SubFormNames;
 import com.lab.manus.service.FormService;
-import com.lab.manus.util.FormEntity;
 import com.lab.manus.util.FormHandler;
 
 @Controller
@@ -26,7 +26,7 @@ public class FormController {
 	FormService formService;
 	
 	@PostMapping("/dynamicform")
-	public String createForm(@ModelAttribute FormEntities formEntities, Model model) {
+	public String createForm(@ModelAttribute FormEntities formEntities) {
 		FormEntities savedFormEntities = new FormEntities();
 		List<FormEntity> formEntityList = new ArrayList<FormEntity>();
 		SubFormNames subFormNames = new SubFormNames();
@@ -41,8 +41,6 @@ public class FormController {
 		}
 		
 		savedFormEntities.setFormEntityList(formEntityList);
-		model.addAttribute("savedFormEntities", savedFormEntities);	
-		
 		
 		for(FormEntity formEntity : formEntityList) {
 			System.out.println(formEntity.getFieldName().replaceAll(" ", "_") +"  |  "+ formEntity.getFieldType());

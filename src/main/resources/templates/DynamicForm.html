@@ -7,9 +7,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script>
+        let addArchive = function(archiveObj){
+        	archiveObj.value = archiveObj.checked ? 1 : 0; 
+        }
+        
         let addRow = function () {
         let listName = 'formEntityList'; //list name in FormEntityList.class
-        let fieldsNames = ['fieldName', 'fieldType']; //field names from FormEntity
+        let fieldsNames = ['fieldName', 'fieldType', 'archive']; //field names from FormEntity
         let rowIndex = $('div.index').length;
         let row = document.createElement('div');
         row.classList.add('row', 'index');
@@ -18,7 +22,6 @@
         fieldsNames.forEach((fieldName) => {
             let col = document.createElement('div');
             col.classList.add('col', 'form-group');
-            col.classList.add('col', 'col-md-2');
             
             let input = document.createElement('input');
             if(fieldName =='fieldType'){
@@ -31,8 +34,15 @@
             	    option.text = arrayText[i];
             	    input.appendChild(option);
             	  }
+                col.classList.add('col', 'col-md-2');
+            } else if(fieldName =='archive'){
+            	input.type = 'checkbox';
+            	input.value = '0';
+                col.classList.add('col', 'col-md-1');
+                input.setAttribute('onclick', 'addArchive(this)');
             } else{
             	input.type = 'text';
+                col.classList.add('col', 'col-md-2');
             }
             input.classList.add('form-control');
             input.id = listName + rowIndex + '.' + fieldName;
@@ -52,15 +62,19 @@
   <br>
     <form action="#" th:action="@{/dynamicform}" th:object="${formEntities}" method="post">
      <div class="text-primary">
-                        <div class="form-group col-md-2">
+                        <div class="form-group row ml-2">
                             <label>Form Name</label> 
-                            <input type="text" th:field="*{formEntityList[0].subFormNames.formName}" class="form-control">
+                            <div class="col-md-2">
+                              <input type="text" th:field="*{formEntityList[0].subFormNames.formName}" class="form-control" placeholder="Please Type Form Name">
+                            </div>
                        </div>
+                       <hr>
                   <div  id="formEntities">
-                    <div class="row ml-1">
+                    <div class="row ml-1 text-center">
                         <div class="form-group col-md-2">Field Name</div>
                         <div class="form-group col-md-2">Field Type</div>
-                        <div class="form-group col-md-2">Add Row</div>
+                        <div class="form-group col-md-1">Archive</div>
+                        <div class="form-group col-md-1">Add Row</div>
                     </div>    
                     <div class="row ml-1 index" th:each="formEntity, status : ${formEntities.formEntityList}">
                         <div class="form-group col-md-2">
@@ -81,8 +95,11 @@
 	    						 -->
 						    </select>
                         </div>
-                        <div class="form-group col-md-2">
-		                	<button type="button" class="btn btn-success" onclick="addRow()">Add row</button>
+		                <div class="form-group col-md-1">
+                            <input type="checkbox" th:field="*{formEntityList[__${status.index}__].archive}" class="form-control" th:value="0"  onclick="addArchive(this)">
+                        </div>
+                        <div class="form-group col-md-1">
+		                	<button type="button" class="btn btn-success form-control" onclick="addRow()">Add row</button>
 		                </div>
                     </div>
                    </div>

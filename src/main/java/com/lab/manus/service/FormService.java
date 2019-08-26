@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lab.manus.entity.FormEntity;
 import com.lab.manus.entity.SubFormNames;
 import com.lab.manus.repository.FormRepo;
 import com.lab.manus.repository.SubFormNamesRepo;
-import com.lab.manus.util.FormEntity;
 import com.lab.manus.util.FormHandler;
 
 @Service
@@ -24,8 +24,11 @@ public class FormService {
 	@Autowired
 	SubFormNamesRepo SubFormNamesRepo;
 	
-	public FormEntity createForm(FormEntity formEntitiy) {
-		return formRepo.saveAndFlush(formEntitiy);
+	public FormEntity createForm(FormEntity formEntity) {
+		if(formEntity.getArchive()==null) {
+			formEntity.setArchive("0");
+		}
+		return formRepo.saveAndFlush(formEntity);
 	}
 	
 	public SubFormNames createFormName(SubFormNames subFormNames) {

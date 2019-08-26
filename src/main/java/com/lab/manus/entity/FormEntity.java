@@ -1,4 +1,4 @@
-package com.lab.manus.util;
+package com.lab.manus.entity;
 
 
 import java.util.Objects;
@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.lab.manus.entity.SubFormNames;
 
 @Entity
 @Table(name = "form_entity")
@@ -32,6 +30,9 @@ public class FormEntity {
 	
 	@Column(name = "field_type")
 	private String fieldType;
+
+	@Column(name = "archive")
+	private String archive;
 	
 	public Long getId() {
 		return id;
@@ -58,12 +59,16 @@ public class FormEntity {
 	public void setSubFormNames(SubFormNames subFormNames) {
 		this.subFormNames = subFormNames;
 	}
-	
+	public String getArchive() {
+		return archive;
+	}
+	public void setArchive(String archive) {
+		this.archive = archive;
+	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(fieldName, fieldType, subFormNames, id);
+		return Objects.hash(archive, fieldName, fieldType, id, subFormNames);
 	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -72,12 +77,10 @@ public class FormEntity {
 		if (!(obj instanceof FormEntity)) {
 			return false;
 		}
-		
 		FormEntity other = (FormEntity) obj;
-		return Objects.equals(fieldName, other.fieldName) && Objects.equals(fieldType, other.fieldType)
-				&& Objects.equals(subFormNames, other.subFormNames) && Objects.equals(id, other.id);
+		return Objects.equals(archive, other.archive) && Objects.equals(fieldName, other.fieldName)
+				&& Objects.equals(fieldType, other.fieldType) && Objects.equals(id, other.id)
+				&& Objects.equals(subFormNames, other.subFormNames);
 	}
-	
-	
 	
 }

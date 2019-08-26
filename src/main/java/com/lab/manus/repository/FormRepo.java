@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.lab.manus.util.FormEntity;
+import com.lab.manus.entity.FormEntity;
 
 @Repository
 public interface FormRepo extends JpaRepository<FormEntity ,Long> {
