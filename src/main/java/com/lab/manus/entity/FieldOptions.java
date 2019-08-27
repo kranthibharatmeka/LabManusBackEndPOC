@@ -1,6 +1,5 @@
 package com.lab.manus.entity;
 
-
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -12,86 +11,86 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
-@Table(name = "form_entity")
-public class FormEntity {
-    @Id 
+@Table(name = "field_options")
+public class FieldOptions {
+  
+	@Id 
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	private Long id;
+	private Integer id;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "form_entity_id", nullable = false)
+    private FormEntity formEntity;
     
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "form_Id", nullable = false)
     private SubFormNames subFormNames;
 	
-	@Column(name = "field_name")
-	private String fieldName;
-	
 	@Column(name = "field_type")
 	private String fieldType;
-
-	@Column(name = "archive")
-	private String archive;
 	
-	@Transient
+	@Column(name = "options")
 	private String options;
-	
-	public Long getId() {
+
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getFieldName() {
-		return fieldName;
+
+	public FormEntity getFormEntity() {
+		return formEntity;
 	}
-	public void setFieldName(String fieldName) {
-		
-		this.fieldName = fieldName.replaceAll(" ", "_");
+
+	public void setFormEntity(FormEntity formEntity) {
+		this.formEntity = formEntity;
 	}
-	public String getFieldType() {
-		return fieldType;
-	}
-	public void setFieldType(String fieldType) {
-		this.fieldType = fieldType;
-	}
+
 	public SubFormNames getSubFormNames() {
 		return subFormNames;
 	}
+
 	public void setSubFormNames(SubFormNames subFormNames) {
 		this.subFormNames = subFormNames;
 	}
-	public String getArchive() {
-		return archive;
+
+	public String getFieldType() {
+		return fieldType;
 	}
-	public void setArchive(String archive) {
-		this.archive = archive;
+
+	public void setFieldType(String fieldType) {
+		this.fieldType = fieldType;
 	}
-	
+
 	public String getOptions() {
 		return options;
 	}
+
 	public void setOptions(String options) {
 		this.options = options;
 	}
-	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(archive, fieldName, fieldType, id, subFormNames);
+		return Objects.hash(fieldType, formEntity, id, options, subFormNames);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof FormEntity)) {
+		if (!(obj instanceof FieldOptions)) {
 			return false;
 		}
-		FormEntity other = (FormEntity) obj;
-		return Objects.equals(archive, other.archive) && Objects.equals(fieldName, other.fieldName)
-				&& Objects.equals(fieldType, other.fieldType) && Objects.equals(id, other.id)
+		FieldOptions other = (FieldOptions) obj;
+		return Objects.equals(fieldType, other.fieldType) && Objects.equals(formEntity, other.formEntity)
+				&& Objects.equals(id, other.id) && Objects.equals(options, other.options)
 				&& Objects.equals(subFormNames, other.subFormNames);
 	}
 	
