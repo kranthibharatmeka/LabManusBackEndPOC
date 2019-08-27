@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lab.manus.entity.FieldOptions;
 import com.lab.manus.entity.FormEntity;
 import com.lab.manus.entity.SubFormNames;
+import com.lab.manus.repository.FieldOptionsRepo;
 import com.lab.manus.repository.FormRepo;
 import com.lab.manus.repository.SubFormNamesRepo;
 import com.lab.manus.util.FormHandler;
@@ -24,11 +26,26 @@ public class FormService {
 	@Autowired
 	SubFormNamesRepo SubFormNamesRepo;
 	
+	@Autowired
+	FieldOptionsRepo fieldOptionsRepo;
+	
 	public FormEntity createForm(FormEntity formEntity) {
 		if(formEntity.getArchive()==null) {
 			formEntity.setArchive("0");
 		}
 		return formRepo.saveAndFlush(formEntity);
+	}
+	
+	public void createOptionsForFields(FormEntity formEntity) {
+		String[]  options = formEntity.getOptions().split(",");
+		for(String option : options) {
+			FieldOptions fieldOption = new FieldOptions();
+			fieldOption.setFormEntity(formEntity);
+			fieldOption.setSubFormNames(formEntity.getSubFormNames());
+			fieldOption.setFieldType(formEntity.getFieldType());
+			fieldOption.setOptions(option);
+			fieldOptionsRepo.saveAndFlush(fieldOption);
+		}
 	}
 	
 	public SubFormNames createFormName(SubFormNames subFormNames) {

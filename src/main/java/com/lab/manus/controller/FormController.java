@@ -27,7 +27,7 @@ public class FormController {
 	
 	@PostMapping("/dynamicform")
 	public String createForm(@ModelAttribute FormEntities formEntities) {
-		FormEntities savedFormEntities = new FormEntities();
+
 		List<FormEntity> formEntityList = new ArrayList<FormEntity>();
 		SubFormNames subFormNames = new SubFormNames();
 		String formTitle = formEntities.getFormEntityList().get(0).getSubFormNames().getFormName();
@@ -37,10 +37,11 @@ public class FormController {
 		for(FormEntity formEntity : formEntities.getFormEntityList()) {
 			formEntity.setSubFormNames(createdNewSubFormName);
 			FormEntity savedformEntity  = formService.createForm(formEntity);
+				if(formEntity.getOptions()!=null) {
+					formService.createOptionsForFields(savedformEntity);
+			    }
 			formEntityList.add(savedformEntity);
 		}
-		
-		savedFormEntities.setFormEntityList(formEntityList);
 		
 		for(FormEntity formEntity : formEntityList) {
 			System.out.println(formEntity.getFieldName().replaceAll(" ", "_") +"  |  "+ formEntity.getFieldType());

@@ -29,9 +29,8 @@ public class FormHandler {
 			String fieldName = entitiy.getFieldName().replaceAll(" ", "_");
 			
 			if(dbFieldType != null) {
-				fieldsDefPart+= fieldName +" "+ dbFieldType +" ";	
+				fieldsDefPart+= fieldName +" "+ dbFieldType +",";
 			}
-			fieldsDefPart+= ",";
 		}
 		fieldsDefPart = fieldsDefPart.substring(0, fieldsDefPart.length()-1);
 		
