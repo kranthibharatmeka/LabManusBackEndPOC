@@ -13,9 +13,9 @@
         
         let showOptionsField = function(fieldType){
         	if(fieldType.value=='sl' || fieldType.value=='r' || fieldType.value=='c'){
-        		document.getElementById("formEntityList"+fieldType.getAttribute("row")+".options").disabled = false;
+        		document.getElementById("formEntityList"+fieldType.getAttribute("row")+".options").hidden = false;
         	} else{
-        		document.getElementById("formEntityList"+fieldType.getAttribute("row")+".options").disabled = true;
+        		document.getElementById("formEntityList"+fieldType.getAttribute("row")+".options").hidden = true;
         	}
         }
         
@@ -50,7 +50,7 @@
             	input.setAttribute("rows","2");
             	input.setAttribute("placeholder","Please enter options separated with comma");
 	            col.classList.add('col', 'col-md-2');
-	            input.setAttribute("disabled","true");
+	            input.setAttribute("hidden","true");
             } else if(fieldName =='archive'){
             	input.type = 'checkbox';
             	input.value = '0';
@@ -110,7 +110,7 @@
 						    </select>
                         </div>
                         <div class="form-group col-md-2">
-                            <textarea th:field="*{formEntityList[__${status.index}__].options}" rows="2" class="form-control" placeholder="Please enter options separated with comma" id="formEntityList0.options" disabled="true"></textarea>
+                            <textarea th:field="*{formEntityList[__${status.index}__].options}" rows="2" class="form-control" placeholder="Please enter options separated with comma" id="formEntityList0.options" hidden></textarea>
                         </div>
 		                <div class="form-group col-md-1">
                             <input type="checkbox" th:field="*{formEntityList[__${status.index}__].archive}" class="form-control" th:value="*{formEntityList[__${status.index}__].archive}" onclick="addArchive(this)" >
