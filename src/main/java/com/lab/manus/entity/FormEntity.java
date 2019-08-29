@@ -1,6 +1,8 @@
 package com.lab.manus.entity;
 
 
+import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -9,21 +11,24 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumns;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
 @Table(name = "form_entity")
-public class FormEntity {
+public class FormEntity implements Serializable {
     @Id 
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
+	@Column(name = "id", unique = true, nullable = false, insertable=false, updatable=false)
 	private Long id;
     
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "form_Id", nullable = false)
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "form_id", nullable = false)
     private SubFormNames subFormNames;
 	
 	@Column(name = "field_name")
@@ -31,7 +36,21 @@ public class FormEntity {
 	
 	@Column(name = "field_type")
 	private String fieldType;
-
+	
+	@JoinColumns({
+	   @JoinColumn(name="form_id", referencedColumnName="form_id"),
+	   @JoinColumn(name="form_entity_id", referencedColumnName="id")
+	})
+	@OneToMany
+	private List<FieldOptions> fieldOptions;
+	
+	
+	public List<FieldOptions> getFieldOptions() {
+		return fieldOptions;
+	}
+	public void setFieldOptions(List<FieldOptions> fieldOptions) {
+		this.fieldOptions = fieldOptions;
+	}
 	@Column(name = "archive")
 	private String archive;
 	

@@ -26,7 +26,7 @@ public class FieldOptions {
     private FormEntity formEntity;
     
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "form_Id", nullable = false)
+	@JoinColumn(name = "form_id", nullable = false)
     private SubFormNames subFormNames;
 	
 	@Column(name = "field_type")

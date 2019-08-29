@@ -64,27 +64,39 @@ public class FormService {
 		
     	String tabName = request.getParameter("form_name");
     	String query = "INSERT INTO "+ tabName + " "; 
-    	String colNames = "( ";
-    	String colVals = "( ";
+    	String colNames = "(";
+    	String colVals = "";
     	
     	for(String paramName : request.getParameterMap().keySet()) {
     		
     		if( !paramName.equalsIgnoreCase("form_name") ) {
     			colNames+= paramName + ",";    			
-    			String temp = request.getParameter(paramName);    					
-    			if(temp.equalsIgnoreCase("on")) {
-    				temp = "1";
+//    			String temp = request.getParameter(paramName);    					
+    			String[] temp1 = request.getParameterValues(paramName);
+    			
+    			if(temp1.length > 1) {
+    				String optionVals = "";
+    				
+        			for(String val : request.getParameterValues(paramName)) {
+        				optionVals+=val+"-";
+        			}    				
+        			colVals+= optionVals + ",";
     			}else {
-    				temp = "'" + temp + "'";
-    			}    					
-        		colVals+= temp + ",";	
+    				colVals+= temp1[0] + ",";	
+    			}	
     		}
     	}
     	
-    	colNames = colNames.substring(0, colNames.length() - 1) + " )";
-    	colVals = colVals.substring(0, colVals.length() - 1) + " )";
+    	colNames = colNames.substring(0, colNames.length() - 1) + ")";
+//    	colVals = colVals.substring(0, colVals.length() - 1) + ")";
+    	String forattedColVals = "(";
+    	for(String str : colVals.split(",")) {
+    		forattedColVals+= "'" + str + "',";
+    		
+    	}
+    	forattedColVals = forattedColVals.substring(0, forattedColVals.length() - 1) + ")";
     	
-    	query+= colNames + " VALUES " + colVals;
+    	query+= colNames + " VALUES " + forattedColVals;
     	
     	System.out.println(">>>insert Quey>>>>>  "+query);
 
