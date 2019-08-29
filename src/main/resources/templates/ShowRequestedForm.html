@@ -14,51 +14,60 @@
 		        	  <div class="form-group row" th:if="${formEntity.fieldType=='t'}">
 		        		<label class="col-sm-2 col-form-label">[[${#strings.replace(formEntity.fieldName, '_',' ')}]]</label>
 		        		<div class="col-sm-2">
-		        		   <input type="text" th:name="${formEntity.fieldName}" class="form-control" th:disabled="${formEntity.archive == '1'}"/>
+		        		   <input type="text" th:name="${formEntity.fieldName}" class="form-control" th:disabled="${formEntity.archive == '1'}" required/>
 		        		</div>
 		        	  </div>
 		        	  <div class="form-group row" th:if="${formEntity.fieldType=='r'}">
 		        	    <label class="col-sm-2 col-form-label">[[${#strings.replace(formEntity.fieldName, '_',' ')}]]</label>
 		        		 
 		        		<div class="col-sm-2">
-		        			<th:block th:each="FieldOptions, iterStat : ${formEntity.fieldOptions}" >
-		        		   		<p> [[${FieldOptions.options}]] <input type="radio" th:name="${formEntity.fieldName}" th:value="${FieldOptions.options}"></p>
-		        			</th:block>
+		        			<span th:each="fieldOptions : ${formEntity.fieldOptions}">
+				                <input type="radio" th:name="${formEntity.fieldName}" th:disabled="${formEntity.archive == '1'}" th:text="${fieldOptions.options}" th:value="${fieldOptions.id}" required/>
+				            </span>
 		        		</div>
-		        		
 		        	  </div>
 		        	  <div class="form-group row" th:if="${formEntity.fieldType=='d'}">
 		        	    <label class="col-sm-2 col-form-label">[[${#strings.replace(formEntity.fieldName, '_',' ')}]]</label>
 		        	    <div class="col-sm-2">
-		        	      <input type="date"  th:name="${formEntity.fieldName}" class="form-control" th:disabled="${formEntity.archive == '1'}"/>
+		        	      <input type="date"  th:name="${formEntity.fieldName}" class="form-control" th:disabled="${formEntity.archive == '1'}" required/>
 		        	    </div>
 		        	  </div>
 		        	  <div class="form-group row" th:if="${formEntity.fieldType=='c'}">
 		        	    <label class="col-sm-2 col-form-label">[[${#strings.replace(formEntity.fieldName, '_',' ')}]]</label>
-		        	    
 		        	    <div class="col-sm-2">
-		        			<th:block th:each="FieldOptions, iterStat : ${formEntity.fieldOptions}" >
-		        		   		<p> [[${FieldOptions.options}]] <input type="checkbox" th:name="${formEntity.fieldName}" th:value="${FieldOptions.options}"></p>
-		        			</th:block>
-		        		</div>
-		        	    
+			        	    <ul>
+						       <li th:each="fieldOptions : ${formEntity.fieldOptions}">
+						         <input type="checkbox" th:name="${formEntity.fieldName}" th:disabled="${formEntity.archive == '1'}" th:value="${fieldOptions.id}" />
+						         <label th:text="${fieldOptions.options}"></label>
+						      </li>
+						   </ul>
+		        	    </div>
 		        	  </div>
 		        	  <div class="form-group row" th:if="${formEntity.fieldType=='e'}">
 		        	    <label class="col-sm-2 col-form-label">[[${#strings.replace(formEntity.fieldName, '_',' ')}]]</label>
 		        	    <div class="col-sm-2">
-		        	      <input type="email"  th:name="${formEntity.fieldName}"  class="form-control" th:disabled="${formEntity.archive == '1'}"/>
+		        	      <input type="email"  th:name="${formEntity.fieldName}"  class="form-control" th:disabled="${formEntity.archive == '1'}" required/>
 		        	    </div>
 		        	  </div>
 		        	  <div class="form-group row" th:if="${formEntity.fieldType=='n'}">
 		        	    <label class="col-sm-2 col-form-label">[[${#strings.replace(formEntity.fieldName, '_',' ')}]]</label>
 		        	    <div class="col-sm-2">
-		        	      <input type="number"  th:name="${formEntity.fieldName}"  class="form-control" th:disabled="${formEntity.archive == '1'}"/>
+		        	      <input type="number"  th:name="${formEntity.fieldName}"  class="form-control" th:disabled="${formEntity.archive == '1'}" required/>
 		        	    </div>
 		        	  </div>
 		        	  <div class="form-group row" th:if="${formEntity.fieldType=='ta'}">
 		        	    <label class="col-sm-2 col-form-label">[[${#strings.replace(formEntity.fieldName, '_',' ')}]]</label>
 		        	    <div class="col-sm-2">
-		        	      <textarea  th:name="${formEntity.fieldName}"  class="form-control" th:disabled="${formEntity.archive == '1'}"></textarea>
+		        	      <textarea  th:name="${formEntity.fieldName}"  class="form-control" th:disabled="${formEntity.archive == '1'}" required></textarea>
+		        	    </div>
+		        	  </div>
+		        	  <div class="form-group row" th:if="${formEntity.fieldType=='sl'}">
+		        	    <label class="col-sm-2 col-form-label">[[${#strings.replace(formEntity.fieldName, '_',' ')}]]</label>
+		        	    <div class="col-sm-2">
+		        	      <select  th:name="${formEntity.fieldName}"  class="form-control" th:disabled="${formEntity.archive == '1'}" required>
+		        	        <option value="0">--Select--</option>
+    						<option th:each="fieldOptions : ${formEntity.fieldOptions}" th:value="${fieldOptions.id}" th:text="${fieldOptions.options}"></option>
+		        	      </select>
 		        	    </div>
 		        	  </div>
 		        	  </div>		        	  
