@@ -22,7 +22,12 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "form_entity")
 public class FormEntity implements Serializable {
-    @Id 
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id 
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false, insertable=false, updatable=false)
 	private Long id;

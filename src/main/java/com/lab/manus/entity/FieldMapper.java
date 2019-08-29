@@ -9,13 +9,15 @@ public class FieldMapper {
 	
 	public FieldMapper() {
 		
-		fieldsMap.put("r", "VARCHAR(50)");
-		fieldsMap.put("c", "VARCHAR(50)");
+		fieldsMap.put("r", "int");
+		fieldsMap.put("c", "int");
 		fieldsMap.put("t", "VARCHAR(50)");
 		fieldsMap.put("d", "date");
 		fieldsMap.put("e", "VARCHAR(50)");
 		fieldsMap.put("ta", "VARCHAR(100)");
 		fieldsMap.put("n", "numeric");
+		fieldsMap.put("sl", "int");
+		
 	}
 	 
 	

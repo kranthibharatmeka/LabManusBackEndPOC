@@ -1,5 +1,6 @@
 package com.lab.manus.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -11,7 +12,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "sub_form_names")
-public class SubFormNames {
+public class SubFormNames implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
     @Id 
     @GeneratedValue(strategy=GenerationType.IDENTITY)

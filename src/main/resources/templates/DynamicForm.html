@@ -12,10 +12,13 @@
         }
         
         let showOptionsField = function(fieldType){
+        	var fieldOptions = document.getElementById("formEntityList"+fieldType.getAttribute("row")+".options");
         	if(fieldType.value=='sl' || fieldType.value=='r' || fieldType.value=='c'){
-        		document.getElementById("formEntityList"+fieldType.getAttribute("row")+".options").hidden = false;
+        		fieldOptions.hidden = false;
+        		fieldOptions.setAttribute("required","required");
         	} else{
-        		document.getElementById("formEntityList"+fieldType.getAttribute("row")+".options").hidden = true;
+        		fieldOptions.hidden = true;
+        		fieldOptions.removeAttribute("required")
         	}
         }
         
@@ -51,7 +54,6 @@
             	input.setAttribute("placeholder","Please enter options separated with comma");
 	            col.classList.add('col', 'col-md-2');
 	            input.setAttribute("hidden","true");
-	            input.setAttribute("required","required");
             } else if(fieldName =='archive'){
             	input.type = 'checkbox';
             	input.value = '0';
