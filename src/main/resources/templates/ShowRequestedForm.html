@@ -9,7 +9,7 @@
 	         <form action="#" th:action="@{/saveDynamicForm}" th:object="${requestedFormFields}" method="post">
 	         
 	         <input type="hidden" name="form_name" th:value="${requestedFormFields[0].subFormNames.formName}">
-	             <h2 class="text-center bg-primary"><a class="btn btn-primary float-left" href="/form">Home</a> <a class="btn btn-primary mr-2 float-left" href="/getAllFormNames">User Forms</a>[[${#strings.replace(requestedFormFields[0].subFormNames.formName, '_',' ')}]]</h2>
+	             <h2 class="text-center text-white bg-primary"><a class="btn btn-primary float-left" href="/form">Home</a> <a class="btn btn-primary mr-2 float-left" href="/getAllFormNames">User Forms</a>[[${#strings.replace(requestedFormFields[0].subFormNames.formName, '_',' ')}]]</h2>
 		         <div th:each="formEntity,itr : ${requestedFormFields}" class="text-primary ml-2">
 		        	  <div class="form-group row" th:if="${formEntity.fieldType=='t'}">
 		        		<label class="col-sm-2 col-form-label">[[${#strings.replace(formEntity.fieldName, '_',' ')}]]</label>

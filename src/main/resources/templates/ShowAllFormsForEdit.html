@@ -6,7 +6,7 @@
 </head>
 <body> 
 	  <div class="card m-3 border-primary">
-		  <h2 class="text-muted text-center bg-primary"><a class="btn btn-primary mb-1 float-left" href="/form">Home</a>User Forms Customisation</h2>
+		  <h2 class="text-muted text-white text-center bg-primary"><a class="btn btn-primary mb-1 float-left" href="/form">Home</a>User Forms Customisation</h2>
 	      <div class="ml-2" th:each="formNames : ${allFormNames}">
 	        <a class="btn btn-outline-info mb-1" th:href="@{'/getFormInEditMode/'+${formNames.formId}}">[[${#strings.replace(formNames.formName, '_',' ')}]]</a>
 	      </div>

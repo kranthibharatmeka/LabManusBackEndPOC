@@ -37,7 +37,7 @@ public class FormController {
 		for(FormEntity formEntity : formEntities.getFormEntityList()) {
 			formEntity.setSubFormNames(createdNewSubFormName);
 			FormEntity savedformEntity  = formService.createForm(formEntity);
-				if(formEntity.getOptions()!=null) {
+				if(!formEntity.getOptions().isBlank()) {
 					formService.createOptionsForFields(savedformEntity);
 			    }
 			formEntityList.add(savedformEntity);
