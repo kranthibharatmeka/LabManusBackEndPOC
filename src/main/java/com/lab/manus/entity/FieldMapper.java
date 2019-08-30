@@ -10,7 +10,7 @@ public class FieldMapper {
 	public FieldMapper() {
 		
 		fieldsMap.put("r", "int");
-		fieldsMap.put("c", "int");
+		fieldsMap.put("c", "VARCHAR(50)");
 		fieldsMap.put("t", "VARCHAR(50)");
 		fieldsMap.put("d", "date");
 		fieldsMap.put("e", "VARCHAR(50)");
