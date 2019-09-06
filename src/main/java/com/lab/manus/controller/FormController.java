@@ -34,18 +34,17 @@ public class FormController {
 		formTitle = formTitle.replaceAll(" ", "_");
 		subFormNames.setFormName(formTitle);
 		SubFormNames createdNewSubFormName = formService.createFormName(subFormNames);
-		for(FormEntity formEntity : formEntities.getFormEntityList()) {
+		
+		formEntities.getFormEntityList().forEach(formEntity ->{
 			formEntity.setSubFormNames(createdNewSubFormName);
 			FormEntity savedformEntity  = formService.createForm(formEntity);
 				if(!formEntity.getOptions().isBlank()) {
 					formService.createOptionsForFields(savedformEntity);
 			    }
 			formEntityList.add(savedformEntity);
-		}
+		});
 		
-		for(FormEntity formEntity : formEntityList) {
-			System.out.println(formEntity.getFieldName().replaceAll(" ", "_") +"  |  "+ formEntity.getFieldType());
-		}
+		formEntityList.forEach(formEntity -> System.out.println(formEntity.getFieldName().replaceAll(" ", "_") +"  |  "+ formEntity.getFieldType()));
 		
 		FormHandler formHandler = new FormHandler();
 		formHandler.createDynamicTable(formTitle, formEntityList);
